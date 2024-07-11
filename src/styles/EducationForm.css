@@ -1,0 +1,18 @@
+/* form className = educationForm */
+.educationForm div{
+    margin-bottom: 15px;
+}
+
+.educationForm .inner-div {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+
+}
+
+.educationForm .label-input {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+

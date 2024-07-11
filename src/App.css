@@ -1,25 +1,41 @@
 /* App.css */
-
+html, body,#root {
+  height: 100%;
+  margin: 0;
+}
 .app {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
   text-align: center;
-  padding: 20px;
+  gap: 50px;
 }
 
-.form-container {
-  margin-top: 20px;
+.form-container{
+  align-self: center;
+  border: 2px solid pink;
+  width: 100%;
+}
+
+.form-container h2{
+  text-align: left;
+  padding-left: 20px;
 }
 
 form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 0 auto;
-  max-width: 300px;
+  border: 1px solid black;
+  padding: 15px;
+  border-radius: 5px;
+  /* margin: 0 auto; */
+  /* max-width: 300px; */
 }
 
-form div {
+/* form div {
   margin-bottom: 15px;
-}
+} */
 
 form label {
   margin-bottom: 5px;
@@ -28,22 +44,36 @@ form label {
 
 form input,
 form textarea {
-  width: 100%;
+  /* width: 100%; */
   padding: 8px;
   border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-form button {
-  background-color: #007bff;
-  color: white;
-  border: none;
-  padding: 10px 20px;
   border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
 }
 
-form button:hover {
-  background-color: #0056b3;
+form textarea {
+  resize: none;
+}
+
+.side-bar{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.navigation{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.navigation button{
+  padding: 25px;
+}
+
+.livePage-container{
+  display: flex;
+  flex-direction: column;
+  border: 2px solid pink;
+  width: 100%;
 }

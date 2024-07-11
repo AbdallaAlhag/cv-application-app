@@ -1,0 +1,25 @@
+/* form className = linkForm */
+
+.linkForm .outer-div{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+ 
+.linkForm .outer-div p{
+    margin-right: 25px;
+    width: 100px;
+}
+
+.linkForm .inner-div{
+    display: flex;
+    flex-direction: column;
+}
+
+.linkForm .title{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}

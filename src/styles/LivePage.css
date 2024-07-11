@@ -1,0 +1,6 @@
+.LivePage{
+    box-sizing: border-box;
+    height:  100%;
+    margin: 50px;
+    border: 1px solid black;
+}
