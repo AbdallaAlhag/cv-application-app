@@ -1,11 +1,12 @@
 import { useState } from "react";
+import "./App.css";
 import Navigation from "./components/Navigation";
 import PersonalForm from "./components/PersonalForm";
 import LinkForm from "./components/LinkForm";
 import EtcForm from "./components/EtcForm";
-import "./App.css";
 import LivePage from "./components/LivePage";
 import EducationForm from "./components/EducationForm";
+import TechForm from "./components/TechForm";
 
 const App = () => {
   const [currentForm, setCurrentForm] = useState("personal");
@@ -33,25 +34,71 @@ const App = () => {
     },
     education: {
       degree1: {
-        university: '',
-        degree: '',
-        graduation: '',
-        other: '',
+        university: "",
+        degree: "",
+        graduation: "",
+        other: "",
       },
       degree2: {
-        university: '',
-        degree: '',
-        graduation: '',
-        other: '',
+        university: "",
+        degree: "",
+        graduation: "",
+        other: "",
+      },
+    },
+    tech: {
+      complex: {
+        language: {
+          language_1: "",
+          language_2: "",
+          language_3: "",
+          language_4: "",
+        },
+        external: {
+          external_1: "",
+          external_2: "",
+          external_3: "",
+          external_4: "",
+        },
+        tool: {
+          tool_1: "",
+          tool_2: "",
+          tool_3: "",
+          tool_4: "",
+        },
+      },
+      simple: {
+        skill_1: "",
+        skill_2: "",
+        skill_3: "",
+        skill_4: "",
       },
     },
   });
 
-
-  const handleFormChange = (formName, degree = null) => (e) => {
+  const handleFormChange =
+  (formName, degree = null, category = null) =>
+  (e = { target: { name: '', value: '' } }) => {
     const { name, value } = e.target;
+    console.log(`FormName: ${formName}, Degree: ${degree}, Category: ${category}`);
+    console.log(`Name: ${name}, Value: ${value}`);
+    
     setFormData((prevData) => {
-      if (degree) {
+      if (degree && category) {
+        return {
+          ...prevData,
+          [formName]: {
+            ...prevData[formName],
+            [degree]: {
+              ...prevData[formName][degree],
+              [category]: {
+                ...prevData[formName][degree][category],
+                [name]: value,
+              },
+            },
+          },
+        };
+      } else if (degree) {
         return {
           ...prevData,
           [formName]: {
@@ -73,7 +120,7 @@ const App = () => {
       }
     });
   };
-  
+
 
   const renderForm = () => {
     switch (currentForm) {
@@ -104,6 +151,10 @@ const App = () => {
             formData={formData.education}
             handleChange={handleFormChange}
           />
+        );
+      case "tech":
+        return (
+          <TechForm formData={formData.tech} handleChange={handleFormChange} />
         );
       default:
         return <PersonalForm />;

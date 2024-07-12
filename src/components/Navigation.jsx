@@ -16,6 +16,9 @@ const Navigation = ({ setForm }) => {
       <button className="nav-button" onClick={() => setForm("education")}>
         Education
       </button>
+      <button className="nav-button" onClick={() => setForm("tech")}>
+        Tech
+      </button>
     </nav>
   );
 };
