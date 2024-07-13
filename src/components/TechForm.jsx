@@ -1,6 +1,11 @@
-import  { useState } from "react";
+import { useState } from "react";
 
-const TechForm = ({ formData, handleChange }) => {
+const TechForm = ({
+  formData,
+  handleChange,
+  handleAddField,
+  handleDeleteField,
+}) => {
   const [activeForm, setActiveForm] = useState("complex");
 
   const toggleForm = () => {
@@ -12,16 +17,31 @@ const TechForm = ({ formData, handleChange }) => {
       <h1>Technical Skills</h1>
       <button onClick={toggleForm}>Toggle Simple/Complex</button>
       {activeForm === "complex" && (
-        <ComplexForm formData={formData.complex} handleChange={handleChange} />
+        <ComplexForm
+          formData={formData.complex}
+          handleChange={handleChange}
+          handleAddField={handleAddField}
+          handleDeleteField={handleDeleteField}
+        />
       )}
       {activeForm === "simple" && (
-        <SimpleForm formData={formData.simple} handleChange={handleChange} />
+        <SimpleForm
+          formData={formData.simple}
+          handleChange={handleChange}
+          handleAddField={handleAddField}
+          handleDeleteField={handleDeleteField}
+        />
       )}
     </div>
   );
 };
 
-const ComplexForm = ({ formData, handleChange }) => {
+const ComplexForm = ({
+  formData,
+  handleChange,
+  handleAddField,
+  handleDeleteField,
+}) => {
   const forms = ["language", "external", "tool"];
   const headers = ["Languages", "Frameworks, Libraries, & Databases", "Tools"];
 
@@ -51,31 +71,46 @@ const ComplexForm = ({ formData, handleChange }) => {
         <LanguageForm
           formData={formData.language}
           handleChange={handleChange("tech", "complex", "language")}
+          handleAddField={() => handleAddField("complex", "language")}
+          handleDeleteField={(key) =>
+            handleDeleteField("complex", "language", key)
+          }
         />
       )}
       {index === 1 && (
         <ExternalForm
           formData={formData.external}
           handleChange={handleChange("tech", "complex", "external")}
+          handleAddField={() => handleAddField("complex", "external")}
+          handleDeleteField={(key) =>
+            handleDeleteField("complex", "external", key)
+          }
         />
       )}
       {index === 2 && (
         <ToolForm
           formData={formData.tool}
           handleChange={handleChange("tech", "complex", "tool")}
+          handleAddField={() => handleAddField("complex", "tool")}
+          handleDeleteField={(key) => handleDeleteField("complex", "tool", key)}
         />
       )}
     </>
   );
 };
 
-const LanguageForm = ({ formData, handleChange }) => (
+const LanguageForm = ({
+  formData,
+  handleChange,
+  handleAddField,
+  handleDeleteField,
+}) => (
   <div>
     <form>
       <div className="inner-div">
         {Object.keys(formData).map((key) => (
           <div className="input" key={key}>
-            <label htmlFor={key}></label>
+            <label htmlFor={key}>{key}</label>
             <input
               type="text"
               id={key}
@@ -84,20 +119,41 @@ const LanguageForm = ({ formData, handleChange }) => (
               value={formData[key]}
               onChange={handleChange}
             />
+            <button
+              type="button"
+              onClick={() => {
+                handleDeleteField(key);
+              }}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>
+      <button
+        type="button"
+        onClick={() => {
+          handleAddField();
+        }}
+      >
+        Add More
+      </button>
     </form>
   </div>
 );
 
-const ExternalForm = ({ formData, handleChange }) => (
+const ExternalForm = ({
+  formData,
+  handleChange,
+  handleAddField,
+  handleDeleteField,
+}) => (
   <div>
     <form>
       <div className="inner-div">
         {Object.keys(formData).map((key) => (
           <div className="input" key={key}>
-            <label htmlFor={key}></label>
+            <label htmlFor={key}>{key}</label>
             <input
               type="text"
               id={key}
@@ -106,20 +162,41 @@ const ExternalForm = ({ formData, handleChange }) => (
               value={formData[key]}
               onChange={handleChange}
             />
+            <button
+              type="button"
+              onClick={() => {
+                handleDeleteField(key);
+              }}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>
+      <button
+        type="button"
+        onClick={() => {
+          handleAddField();
+        }}
+      >
+        Add More
+      </button>
     </form>
   </div>
 );
 
-const ToolForm = ({ formData, handleChange }) => (
+const ToolForm = ({
+  formData,
+  handleChange,
+  handleAddField,
+  handleDeleteField,
+}) => (
   <div>
     <form>
       <div className="inner-div">
         {Object.keys(formData).map((key) => (
           <div className="input" key={key}>
-            <label htmlFor={key}></label>
+            <label htmlFor={key}>{key}</label>
             <input
               type="text"
               id={key}
@@ -128,20 +205,41 @@ const ToolForm = ({ formData, handleChange }) => (
               value={formData[key]}
               onChange={handleChange}
             />
+            <button
+              type="button"
+              onClick={() => {
+                handleDeleteField(key);
+              }}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>
+      <button
+        type="button"
+        onClick={() => {
+          handleAddField();
+        }}
+      >
+        Add More
+      </button>
     </form>
   </div>
 );
 
-const SimpleForm = ({ formData, handleChange }) => (
+const SimpleForm = ({
+  formData,
+  handleChange,
+  handleAddField,
+  handleDeleteField,
+}) => (
   <div>
     <form>
       <div className="inner-div">
         {Object.keys(formData).map((key) => (
           <div className="input" key={key}>
-            <label htmlFor={key}></label>
+            <label htmlFor={key}>{key}</label>
             <input
               type="text"
               id={key}
@@ -150,9 +248,26 @@ const SimpleForm = ({ formData, handleChange }) => (
               value={formData[key]}
               onChange={handleChange}
             />
+            <button
+              type="button"
+              onClick={() => {
+                handleDeleteField("simple", null, key);
+              }}
+            >
+              Delete
+            </button>
           </div>
         ))}
       </div>
+      <button
+        type="button"
+        onClick={() => {
+            console.log('wtf')
+          handleAddField("simple", null);
+        }}
+      >
+        Add More
+      </button>
     </form>
   </div>
 );
