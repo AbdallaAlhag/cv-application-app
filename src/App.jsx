@@ -7,6 +7,7 @@ import EtcForm from "./components/EtcForm";
 import LivePage from "./components/LivePage";
 import EducationForm from "./components/EducationForm";
 import TechForm from "./components/TechForm";
+import WorkForm from "./components/WorkForm";
 
 const App = () => {
   const [currentForm, setCurrentForm] = useState("personal");
@@ -74,17 +75,43 @@ const App = () => {
         skill_4: "",
       },
     },
+    work: {
+      job_1: {
+        name: "",
+        title: "",
+        duration: "",
+        address: "",
+        bulletPoint: {
+          bulletPoint_1: "",
+          bulletPoint_2: "",
+          bulletPoint_3: "",
+          bulletPoint_4: "",
+        },
+      },
+      job_2: {
+        name: "",
+        title: "",
+        duration: "",
+        address: "",
+        bulletPoint: {
+          bulletPoint_1: "",
+          bulletPoint_2: "",
+          bulletPoint_3: "",
+          bulletPoint_4: "",
+        },
+      },
+    },
   });
 
   const handleFormChange =
     (formName, degree = null, category = null) =>
     (e = { target: { name: "", value: "" } }) => {
       const { name, value } = e.target;
-      console.log("wtf");
-      console.log(
-        `FormName: ${formName}, Degree: ${degree}, Category: ${category}`
-      );
-      console.log(`Name: ${name}, Value: ${value}`);
+      // console.log("wtf");
+      // console.log(
+      //   `FormName: ${formName}, Degree: ${degree}, Category: ${category}`
+      // );
+      // console.log(`Name: ${name}, Value: ${value}`);
 
       setFormData((prevData) => {
         if (degree && category) {
@@ -124,106 +151,138 @@ const App = () => {
       });
     };
 
-  // const handleAddField = () => {
-  //   const newKey = `skill_${Object.keys(formData.tech.simple).length + 1}`;
-  //   setFormData((prevData) => ({
-  //     ...prevData,
-  //     tech: {
-  //       ...prevData.tech,
-  //       simple: {
-  //         ...prevData.tech.simple,
-  //         [newKey]: "", // or your desired default value
-  //       },
-  //     },
-  //   }));
-  // };
-  const handleAddField = (formType, category) => {
+  const handleAddField = (formType, category, subCategory) => {
     setFormData((prevData) => {
+      let keys, keyNumbers, maxKey, newKey;
+
       if (category) {
-        const keys = Object.keys(prevData.tech[formType][category]);
-        const keyNumbers = keys.map((key) => parseInt(key.split("_")[1], 10));
-        const maxKey = Math.max(0, ...keyNumbers);
-        const newKey = `${category}_${maxKey + 1}`;
-        return {
-          ...prevData,
-          tech: {
-            ...prevData.tech,
+        if (subCategory) {
+          keys = Object.keys(prevData[formType][category][subCategory]);
+          keyNumbers = keys.map((key) => parseInt(key.split("_")[1], 10));
+          maxKey = Math.max(0, ...keyNumbers);
+          newKey = `${subCategory}_${maxKey + 1}`;
+
+          return {
+            ...prevData,
             [formType]: {
-              ...prevData.tech[formType],
+              ...prevData[formType],
               [category]: {
-                ...prevData.tech[formType][category],
+                ...prevData[formType][category],
+                [subCategory]: {
+                  ...prevData[formType][category][subCategory],
+                  [newKey]: "", // or your desired default value
+                },
+              },
+            },
+          };
+        } else {
+          keys = Object.keys(prevData[formType][category]);
+          keyNumbers = keys.map((key) => parseInt(key.split("_")[1], 10));
+          maxKey = Math.max(0, ...keyNumbers);
+          newKey = `${category}_${maxKey + 1}`;
+
+          return {
+            ...prevData,
+            [formType]: {
+              ...prevData[formType],
+              [category]: {
+                ...prevData[formType][category],
                 [newKey]: "", // or your desired default value
               },
             },
-          },
-        };
+          };
+        }
       } else {
-        const keys = Object.keys(prevData.tech[formType]);
-        const keyNumbers = keys.map((key) => parseInt(key.split("_")[1], 10));
-        const maxKey = Math.max(0, ...keyNumbers);
-        const newKey = `${formType}_${maxKey + 1}`;
+        keys = Object.keys(prevData[formType]);
+        keyNumbers = keys.map((key) => parseInt(key.split("_")[1], 10));
+        maxKey = Math.max(0, ...keyNumbers);
+        newKey = `${formType}_${maxKey + 1}`;
+
         return {
           ...prevData,
-          tech: {
-            ...prevData.tech,
-            [formType]: {
-              ...prevData.tech[formType],
-              [newKey]: "", // or your desired default value
-            },
+          [formType]: {
+            ...prevData[formType],
+            [newKey]: "", // or your desired default value
           },
         };
       }
     });
   };
 
-  // const handleDeleteField = (fieldKey) => {
-  //   setFormData((prevData) => {
-  //     // Make a copy of the simple object
-  //     const updatedSimple = { ...prevData.tech.simple };
-
-  //     // Delete the fieldKey from updatedSimple
-  //     delete updatedSimple[fieldKey];
-
-  //     // Return updated state with simple updated
-  //     return {
-  //       ...prevData,
-  //       tech: {
-  //         ...prevData.tech,
-  //         simple: updatedSimple,
-  //       },
-  //     };
-  //   });
-  // };
-
-  const handleDeleteField = (formType, category, fieldKey) => {
+  const handleDeleteField = (formType, category, fieldKey, subCategory) => {
     setFormData((prevData) => {
       if (category) {
-        const updatedCategory = { ...prevData.tech[formType][category] };
-        delete updatedCategory[fieldKey];
-        return {
-          ...prevData,
-          tech: {
-            ...prevData.tech,
+        if (subCategory) {
+          const updatedSubCategory = {
+            ...prevData[formType][category][subCategory],
+          };
+          delete updatedSubCategory[fieldKey];
+          return {
+            ...prevData,
             [formType]: {
-              ...prevData.tech[formType],
+              ...prevData[formType],
+              [category]: {
+                ...prevData[formType][category],
+                [subCategory]: updatedSubCategory,
+              },
+            },
+          };
+        } else {
+          const updatedCategory = { ...prevData[formType][category] };
+          delete updatedCategory[fieldKey];
+          return {
+            ...prevData,
+            [formType]: {
+              ...prevData[formType],
               [category]: updatedCategory,
             },
-          },
-        };
+          };
+        }
       } else {
-        const updatedFormType = { ...prevData.tech[formType] };
+        const updatedFormType = { ...prevData[formType] };
         delete updatedFormType[fieldKey];
         return {
           ...prevData,
-          tech: {
-            ...prevData.tech,
-            [formType]: updatedFormType,
-          },
+          [formType]: updatedFormType,
         };
       }
     });
   };
+  const handleAddJob = () => {
+    setFormData((prevData) => {
+      const newJobKey = `job_${Object.keys(prevData.work).length + 1}`;
+      return {
+        ...prevData,
+        work: {
+          ...prevData.work,
+          [newJobKey]: {
+            name: "",
+            title: "",
+            duration: "",
+            address: "",
+            bulletPoint: {
+              bullet_1: "",
+              bullet_2: "",
+              bullet_3: "",
+              bullet_4: "",
+            },
+          },
+        },
+      };
+    });
+  };
 
+  const handleDeleteJob = (jobKey) => {
+    setFormData((prevData) => {
+      const updatedWork = { ...prevData.work };
+      delete updatedWork[jobKey];
+      return {
+        ...prevData,
+        work: updatedWork,
+      };
+    });
+  };
+  
   const renderForm = () => {
     switch (currentForm) {
       case "personal":
@@ -259,6 +318,17 @@ const App = () => {
           <TechForm
             formData={formData.tech}
             handleChange={handleFormChange}
+            handleAddField={handleAddField}
+            handleDeleteField={handleDeleteField}
+          />
+        );
+      case "work":
+        return (
+          <WorkForm
+            formData={formData.work}
+            handleChange={handleFormChange}
+            handleAddJob={handleAddJob}
+            handleDeleteJob={handleDeleteJob}
             handleAddField={handleAddField}
             handleDeleteField={handleDeleteField}
           />

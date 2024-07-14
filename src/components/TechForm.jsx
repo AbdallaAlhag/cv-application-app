@@ -71,9 +71,10 @@ const ComplexForm = ({
         <LanguageForm
           formData={formData.language}
           handleChange={handleChange("tech", "complex", "language")}
-          handleAddField={() => handleAddField("complex", "language")}
+          handleAddField={() => handleAddField("tech", "complex", "language")}
           handleDeleteField={(key) =>
-            handleDeleteField("complex", "language", key)
+            // handleDeleteField("complex", "language", key)
+            handleDeleteField("tech", "complex", key, "language")
           }
         />
       )}
@@ -81,9 +82,10 @@ const ComplexForm = ({
         <ExternalForm
           formData={formData.external}
           handleChange={handleChange("tech", "complex", "external")}
-          handleAddField={() => handleAddField("complex", "external")}
+          handleAddField={() => handleAddField("tech", "complex", "external")}
           handleDeleteField={(key) =>
-            handleDeleteField("complex", "external", key)
+            // handleDeleteField("complex", "external", key)
+            handleDeleteField("tech", "complex", key, "external")
           }
         />
       )}
@@ -91,8 +93,10 @@ const ComplexForm = ({
         <ToolForm
           formData={formData.tool}
           handleChange={handleChange("tech", "complex", "tool")}
-          handleAddField={() => handleAddField("complex", "tool")}
-          handleDeleteField={(key) => handleDeleteField("complex", "tool", key)}
+          handleAddField={() => handleAddField("tech", "complex", "tool")}
+          handleDeleteField={(key) =>
+            handleDeleteField("tech", "complex", key, "tool")
+          }
         />
       )}
     </>
@@ -110,7 +114,7 @@ const LanguageForm = ({
       <div className="inner-div">
         {Object.keys(formData).map((key) => (
           <div className="input" key={key}>
-            <label htmlFor={key}>{key}</label>
+            <label htmlFor={key}></label>
             <input
               type="text"
               id={key}
@@ -153,7 +157,7 @@ const ExternalForm = ({
       <div className="inner-div">
         {Object.keys(formData).map((key) => (
           <div className="input" key={key}>
-            <label htmlFor={key}>{key}</label>
+            <label htmlFor={key}></label>
             <input
               type="text"
               id={key}
@@ -196,7 +200,7 @@ const ToolForm = ({
       <div className="inner-div">
         {Object.keys(formData).map((key) => (
           <div className="input" key={key}>
-            <label htmlFor={key}>{key}</label>
+            <label htmlFor={key}></label>
             <input
               type="text"
               id={key}
@@ -239,7 +243,7 @@ const SimpleForm = ({
       <div className="inner-div">
         {Object.keys(formData).map((key) => (
           <div className="input" key={key}>
-            <label htmlFor={key}>{key}</label>
+            <label htmlFor={key}></label>
             <input
               type="text"
               id={key}
@@ -251,7 +255,8 @@ const SimpleForm = ({
             <button
               type="button"
               onClick={() => {
-                handleDeleteField("simple", null, key);
+                // handleDeleteField("simple", null, key);
+                handleDeleteField("tech", "simple", key, null);
               }}
             >
               Delete
@@ -262,8 +267,8 @@ const SimpleForm = ({
       <button
         type="button"
         onClick={() => {
-            console.log('wtf')
-          handleAddField("simple", null);
+          // handleAddField("simple", null);
+          handleAddField("tech", "simple", null);
         }}
       >
         Add More
