@@ -19,3 +19,9 @@
 textarea {
   resize: none;
 }
+
+.address input{
+  width: 200%;
+  align-self: center;
+  text-align: flex-start;
+}

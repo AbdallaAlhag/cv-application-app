@@ -9,9 +9,11 @@ const EducationForm = ({ formData, handleChange }) => {
   };
 
   return (
-    <div>
-      <h1>Education Form</h1>
-      <button onClick={toggleForm}>Toggle Form</button>
+    <div >
+      <div className="header">
+        <h2>Education Form</h2>
+        <button onClick={toggleForm}>Toggle Form</button>
+      </div>
       {activeForm === "degree1" && (
         <FormA
           formData={formData.degree1}
@@ -72,12 +74,12 @@ const FormA = ({ formData, handleChange }) => {
             />
           </div>
           <div className="label-input">
-            <label htmlFor="other">Other</label>
+            <label htmlFor="other">Location</label>
             <input
               type="text"
               id="other"
               name="other"
-              placeholder="GPA, Classes, or Honors"
+              placeholder="Stanford, CA"
               value={formData.other}
               onChange={handleChange}
             />

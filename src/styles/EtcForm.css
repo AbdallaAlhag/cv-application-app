@@ -3,3 +3,7 @@
 .etcForm {
     text-align: left;
 }
+
+.etcForm .inner-div{
+    gap: 5px !important;
+}

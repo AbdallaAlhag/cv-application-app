@@ -1,4 +1,5 @@
 import { useState } from "react";
+import '../styles/TechForm.css';
 
 const TechForm = ({
   formData,
@@ -14,8 +15,10 @@ const TechForm = ({
 
   return (
     <div>
-      <h1>Technical Skills</h1>
-      <button onClick={toggleForm}>Toggle Simple/Complex</button>
+      <div className="header">
+        <h2>Technical Skills</h2>
+        <button onClick={toggleForm}>Toggle Simple/Complex</button>
+      </div>
       {activeForm === "complex" && (
         <ComplexForm
           formData={formData.complex}

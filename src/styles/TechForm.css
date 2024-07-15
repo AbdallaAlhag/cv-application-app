@@ -1,0 +1,43 @@
+.complex-header {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+.complex-header h2 {
+  width: 70%;
+}
+
+form {
+  gap: 20px;
+}
+
+form button {
+  margin-left: 10px;
+}
+
+.inner-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.input button {
+  background: #ed0800;
+  color: whitesmoke;
+}
+
+.input button::before {
+  background-color:   #DC143C;
+
+}
+
+.input button:hover {
+  color: #e8e8e8;
+}

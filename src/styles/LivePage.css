@@ -1,6 +1,146 @@
-.LivePage{
-    box-sizing: border-box;
-    height:  100%;
-    margin: 50px;
-    border: 1px solid black;
+i {
+  margin: 0;
+  padding: 0;
+  line-height: 1; /* Adjust as needed */
+  font-style: italic; /* Default style for <i> element */
+}
+
+.LivePage {
+  box-sizing: border-box;
+  height: 100%;
+  /* width: 794px; Or max-width: 100% for responsiveness */
+  max-width: 100%;
+  /* min-height: 1123px; */
+  margin: 25px;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+  text-align: left;
+  overflow-y: auto; /* Allow vertical scrolling */
+}
+/* Custom Scrollbar for WebKit Browsers */
+::-webkit-scrollbar {
+  width: 8px; /* Width of the scrollbar */
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Track background */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888; /* Scrollbar thumb color */
+  border-radius: 10px; /* Round the corners */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555; /* Darker color on hover */
+}
+
+.LivePage p,
+.LivePage i {
+  font-size: 12px;
+  line-height: 1px;
+}
+
+.LivePage h1,
+h2 {
+  line-height: 5px;
+}
+.LivePage h3,
+h4 {
+  line-height: 1px;
+}
+
+.LivePage li {
+  font-size: 12px;
+}
+
+.personal-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.personal-info .row {
+  display: flex;
+  gap: 5px;
+}
+
+.link-info {
+  display: flex;
+  width: 100%;
+  gap: 25px;
+  justify-content: flex-start;
+  border-bottom: 1px solid black;
+}
+
+.title {
+  border-bottom: 1px solid black;
+  text-align: left;
+  width: 100%;
+}
+
+.title h3 {
+  margin: 10px 0px;
+}
+
+.degree-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.degree-info .left p {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.degree-info .right {
+  text-align: right;
+}
+
+.tech-info .left {
+  display: flex;
+  gap: 5px;
+  align-items: baseline;
+}
+
+.left .info-title {
+  font-weight: bolder;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.left .right {
+  display: flex;
+  gap: 5px;
+}
+
+.job-info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.project-info .left{
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.etc-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.etc-info .row{
+    display: flex;
+    align-items: baseline;
+    gap: 5px;
+}
+
+.etc-info .row .info-title{
+    font-weight: bolder;
+  font-size: 14px;
+  margin-bottom: 0;
 }

@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import '../styles/WorkForm.css';
 
 function WorkForm({
   formData,
@@ -34,7 +35,7 @@ function WorkForm({
 
   return (
     <>
-      <div className="workExperience">
+      <div className="header">
         <h2>{`Job ${index + 1}`}</h2>
         <button onClick={handlePrevClick} disabled={!hasPrev}>
           Previous
@@ -61,7 +62,7 @@ function WorkForm({
             <DynamicForm
               formData={formData[jobKey]}
               jobKey={jobKey}
-              handleChange={handleChange("work", jobKey, "bulletPoint")}
+              handleChange={handleChange}
               handleAddField={() =>
                 handleAddField("work", jobKey, "bulletPoint")
               }
@@ -97,7 +98,7 @@ function DynamicForm({
               name="name"
               placeholder="Company Name"
               value={formData.name}
-              onChange={handleChange}
+              onChange={handleChange("work", jobKey)}
             />
           </div>
           <div className="label-input">
@@ -108,7 +109,7 @@ function DynamicForm({
               name="title"
               placeholder="Job Title"
               value={formData.title}
-              onChange={handleChange}
+              onChange={handleChange("work", jobKey)}
             />
           </div>
         </div>
@@ -121,7 +122,7 @@ function DynamicForm({
               name="duration"
               placeholder="Duration"
               value={formData.duration}
-              onChange={handleChange}
+              onChange={handleChange("work", jobKey)}
             />
           </div>
           <div className="label-input">
@@ -132,7 +133,7 @@ function DynamicForm({
               name="address"
               placeholder="Address"
               value={formData.address}
-              onChange={handleChange}
+              onChange={handleChange("work", jobKey)}
             />
           </div>
         </div>
@@ -148,7 +149,7 @@ function DynamicForm({
                 name={key}
                 placeholder="Key Achievement"
                 value={formData.bulletPoint[key]}
-                onChange={handleChange}
+                onChange={handleChange("work", jobKey, "bulletPoint")}
               />
               <button
                 type="button"

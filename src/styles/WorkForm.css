@@ -1,0 +1,10 @@
+.workForm{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.label-input {
+    display: flex;
+    flex-direction: column;
+}

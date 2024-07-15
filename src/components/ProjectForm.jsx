@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "../styles/ProjectForm.css";
 
 function ProjectForm({
   formData,
@@ -35,7 +36,7 @@ function ProjectForm({
 
   return (
     <>
-      <div className="projectExperience">
+      <div className="header">
         <h2>{`Project ${index + 1}`}</h2>
         <button onClick={handlePrevClick} disabled={!hasPrev}>
           Previous
@@ -61,7 +62,7 @@ function ProjectForm({
             <DynamicForm
               formData={formData[jobKey]}
               jobKey={jobKey}
-              handleChange={handleChange("project", jobKey, "bulletPoint")}
+              handleChange={handleChange}
               handleAddField={() =>
                 handleAddField("project", jobKey, "bulletPoint")
               }
@@ -87,7 +88,7 @@ function DynamicForm({
   // console.log(formData);
   return (
     <>
-      <form className="workForm">
+      <form className="projectForm">
         <div className="inner-div">
           <div className="label-input">
             <label htmlFor={`${jobKey}_name`}>Name</label>
@@ -97,7 +98,7 @@ function DynamicForm({
               name="name"
               placeholder="Project Name"
               value={formData.name}
-              onChange={handleChange}
+              onChange={handleChange("project", jobKey)}
             />
           </div>
           <div className="label-input">
@@ -108,7 +109,7 @@ function DynamicForm({
               name="techStack"
               placeholder="Tech Stack"
               value={formData.techStack}
-              onChange={handleChange}
+              onChange={handleChange("project", jobKey)}
             />
           </div>
         </div>
@@ -124,7 +125,7 @@ function DynamicForm({
                 name={key}
                 placeholder="Key Achievement"
                 value={formData.bulletPoint[key]}
-                onChange={handleChange}
+                onChange={handleChange("project", jobKey, "bulletPoint")}
               />
               <button
                 type="button"

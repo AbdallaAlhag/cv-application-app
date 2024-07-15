@@ -57,8 +57,8 @@ const PersonalForm = ({ formData, handleChange }) => {
           </div>
         </div>
 
-        <div className="inner-div">
-          <div className="label-input">
+        <div className="inner-div address">
+          <div className="label-input ">
             <label htmlFor="address">City, State, Zip</label>
             <input
               type="text"

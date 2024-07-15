@@ -1,4 +1,6 @@
 /* form className = educationForm */
+
+
 .educationForm div{
     margin-bottom: 15px;
 }
@@ -7,7 +9,6 @@
   display: flex;
   flex-direction: row;
   gap: 20px;
-
 }
 
 .educationForm .label-input {

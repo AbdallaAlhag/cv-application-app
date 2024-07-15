@@ -1,5 +1,7 @@
 /* App.css */
-html, body,#root {
+html,
+body,
+#root {
   height: 100%;
   margin: 0;
 }
@@ -11,23 +13,29 @@ html, body,#root {
   gap: 50px;
 }
 
-.form-container{
+.form-container {
   align-self: center;
   border: 2px solid pink;
   width: 100%;
 }
 
-.form-container h2{
+.form-container h2 {
   text-align: left;
   padding-left: 20px;
 }
 
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 95%;
+}
 form {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   border: 1px solid black;
-  padding: 15px;
+  padding: 35px;
   border-radius: 5px;
   /* margin: 0 auto; */
   /* max-width: 300px; */
@@ -54,26 +62,66 @@ form textarea {
   resize: none;
 }
 
-.side-bar{
+.side-bar {
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 20px;
 }
 
-.navigation{
+.navigation {
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
 
-.navigation button{
+.navigation button {
   padding: 25px;
 }
 
-.livePage-container{
+.livePage-container {
   display: flex;
   flex-direction: column;
   border: 2px solid pink;
+  width: 100%;
+}
+
+.form-container button {
+  padding: 5px 15px;
+  border: unset;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #212121;
+  z-index: 1;
+  background: #e8e8e8;
+  position: relative;
+  font-weight: 750;
+  font-size: 12px;
+  /* -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27); */
+  /* box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27); */
+  transition: all 250ms;
+  overflow: hidden;
+}
+
+.form-container button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0;
+  border-radius: 5px;
+  background-color: #212121;
+  z-index: -1;
+  -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
+  transition: all 250ms;
+}
+
+.form-container button:hover {
+  color: #e8e8e8;
+}
+
+.form-container button:hover::before {
   width: 100%;
 }

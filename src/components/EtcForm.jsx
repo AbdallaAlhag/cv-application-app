@@ -11,7 +11,7 @@ const EtcForm = ({ formData, handleChange }) => {
           <textarea
             id="certificates"
             name="certificates"
-            rows="4"
+            rows="6"
             cols="50"
             placeholder="If you have any relevant ones; otherwise leave blank"
             value={formData.certificates}
@@ -24,7 +24,7 @@ const EtcForm = ({ formData, handleChange }) => {
           <textarea
             id="skills"
             name="skills"
-            rows="4"
+            rows="6"
             cols="50"
             placeholder="If you have any relevant ones; otherwise leave blank"
             value={formData.skills}
@@ -37,7 +37,7 @@ const EtcForm = ({ formData, handleChange }) => {
           <textarea
             id="interests"
             name="interests"
-            rows="4"
+            rows="6"
             cols="50"
             placeholder="Reading, sleeping, yoga, fishing, traveling, Reddit, Bear, Football"
             value={formData.interests}
