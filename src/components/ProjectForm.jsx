@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-function WorkForm({
+function ProjectForm({
   formData,
   handleChange,
   handleAddJob,
@@ -24,6 +24,7 @@ function WorkForm({
   };
 
   // Update index when a job is added or deleted
+  // Update index when forms length changes
   useEffect(() => {
     if (forms.length === 0) {
       setIndex(0);
@@ -34,20 +35,20 @@ function WorkForm({
 
   return (
     <>
-      <div className="workExperience">
-        <h2>{`Job ${index + 1}`}</h2>
+      <div className="projectExperience">
+        <h2>{`Project ${index + 1}`}</h2>
         <button onClick={handlePrevClick} disabled={!hasPrev}>
           Previous
         </button>
         <button onClick={handleNextClick} disabled={!hasNext}>
           Next
         </button>
-        <button onClick={handleAddJob}>Add Job</button>
+        <button onClick={handleAddJob}>Add Project</button>
         <button
           onClick={() => handleDeleteJob(forms[index])}
           disabled={index === 0}
         >
-          Delete Job
+          Delete Project
         </button>
       </div>
 
@@ -57,17 +58,16 @@ function WorkForm({
             key={jobKey}
             style={{ display: index === idx ? "block" : "none" }}
           >
-            {/* {console.log(jobKey)} */}
             <DynamicForm
               formData={formData[jobKey]}
               jobKey={jobKey}
-              handleChange={handleChange("work", jobKey, "bulletPoint")}
+              handleChange={handleChange("project", jobKey, "bulletPoint")}
               handleAddField={() =>
-                handleAddField("work", jobKey, "bulletPoint")
+                handleAddField("project", jobKey, "bulletPoint")
               }
               handleDeleteField={(key) =>
                 // handleDeleteField("complex", "language", key)
-                handleDeleteField("work", jobKey, key, "bulletPoint")
+                handleDeleteField("project", jobKey, key, "bulletPoint")
               }
             />
           </div>
@@ -95,43 +95,19 @@ function DynamicForm({
               type="text"
               id={`${jobKey}_name`}
               name="name"
-              placeholder="Company Name"
+              placeholder="Project Name"
               value={formData.name}
               onChange={handleChange}
             />
           </div>
           <div className="label-input">
-            <label htmlFor={`${jobKey}_title`}>Title</label>
+            <label htmlFor={`${jobKey}_techStack`}>Tech Stack</label>
             <input
               type="text"
-              id={`${jobKey}_title`}
-              name="title"
-              placeholder="Job Title"
-              value={formData.title}
-              onChange={handleChange}
-            />
-          </div>
-        </div>
-        <div className="inner-div">
-          <div className="label-input">
-            <label htmlFor={`${jobKey}_duration`}>Duration</label>
-            <input
-              type="text"
-              id={`${jobKey}_duration`}
-              name="duration"
-              placeholder="Duration"
-              value={formData.duration}
-              onChange={handleChange}
-            />
-          </div>
-          <div className="label-input">
-            <label htmlFor={`${jobKey}_address`}>Address</label>
-            <input
-              type="text"
-              id={`${jobKey}_address`}
-              name="address"
-              placeholder="Address"
-              value={formData.address}
+              id={`${jobKey}_techStack`}
+              name="techStack"
+              placeholder="Tech Stack"
+              value={formData.techStack}
               onChange={handleChange}
             />
           </div>
@@ -153,8 +129,6 @@ function DynamicForm({
               <button
                 type="button"
                 onClick={() => {
-                  // handleDeleteField(jobKey,'bulletPoint',key);
-                  // handleDeleteField("work", jobKey, key, "bulletPoint");
                   handleDeleteField(key);
                 }}
               >
@@ -166,8 +140,6 @@ function DynamicForm({
         <button
           type="button"
           onClick={() => {
-            // handleAddField(jobKey,'bulletPoint');
-            // handleAddField("work", jobKey, "bulletPoint");
             handleAddField();
           }}
         >
@@ -178,4 +150,4 @@ function DynamicForm({
   );
 }
 
-export default WorkForm;
+export default ProjectForm;

@@ -255,7 +255,6 @@ const SimpleForm = ({
             <button
               type="button"
               onClick={() => {
-                // handleDeleteField("simple", null, key);
                 handleDeleteField("tech", "simple", key, null);
               }}
             >
@@ -267,7 +266,6 @@ const SimpleForm = ({
       <button
         type="button"
         onClick={() => {
-          // handleAddField("simple", null);
           handleAddField("tech", "simple", null);
         }}
       >

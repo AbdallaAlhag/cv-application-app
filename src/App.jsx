@@ -8,6 +8,7 @@ import LivePage from "./components/LivePage";
 import EducationForm from "./components/EducationForm";
 import TechForm from "./components/TechForm";
 import WorkForm from "./components/WorkForm";
+import ProjectForm from "./components/ProjectForm";
 
 const App = () => {
   const [currentForm, setCurrentForm] = useState("personal");
@@ -93,6 +94,28 @@ const App = () => {
         title: "",
         duration: "",
         address: "",
+        bulletPoint: {
+          bulletPoint_1: "",
+          bulletPoint_2: "",
+          bulletPoint_3: "",
+          bulletPoint_4: "",
+        },
+      },
+    },
+    project: {
+      project_1: {
+        name: "",
+        techStack: "",
+        bulletPoint: {
+          bulletPoint_1: "",
+          bulletPoint_2: "",
+          bulletPoint_3: "",
+          bulletPoint_4: "",
+        },
+      },
+      project_2: {
+        name: "",
+        techStack: "",
         bulletPoint: {
           bulletPoint_1: "",
           bulletPoint_2: "",
@@ -282,7 +305,7 @@ const App = () => {
       };
     });
   };
-  
+
   const renderForm = () => {
     switch (currentForm) {
       case "personal":
@@ -326,6 +349,17 @@ const App = () => {
         return (
           <WorkForm
             formData={formData.work}
+            handleChange={handleFormChange}
+            handleAddJob={handleAddJob}
+            handleDeleteJob={handleDeleteJob}
+            handleAddField={handleAddField}
+            handleDeleteField={handleDeleteField}
+          />
+        );
+      case "project":
+        return (
+          <ProjectForm
+            formData={formData.project}
             handleChange={handleFormChange}
             handleAddJob={handleAddJob}
             handleDeleteJob={handleDeleteJob}
