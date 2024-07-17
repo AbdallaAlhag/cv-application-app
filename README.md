@@ -67,3 +67,5 @@ Contributions are welcome! If you have any improvements or new features to add, 
 
 
 
+## Features/Bugs
+Switch between simple and complex. Adjust css input inside forms. Add drag and drop. Create page indicator for live page. 
