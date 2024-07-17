@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-import '../styles/WorkForm.css';
+import "../styles/WorkForm.css";
 
 function WorkForm({
   formData,
   handleChange,
-  handleAddJob,
-  handleDeleteJob,
+  handleAddItem,
+  handleDeleteItem,
   handleAddField,
   handleDeleteField,
 }) {
   // console.log(formData);
   const forms = Object.keys(formData);
-  // console.log(forms);
+  console.log(forms);
 
   const [index, setIndex] = useState(0);
   const hasPrev = index > 0;
@@ -43,9 +43,9 @@ function WorkForm({
         <button onClick={handleNextClick} disabled={!hasNext}>
           Next
         </button>
-        <button onClick={handleAddJob}>Add Job</button>
+        <button onClick={handleAddItem("work")}>Add Job</button>{" "}
         <button
-          onClick={() => handleDeleteJob(forms[index])}
+          onClick={() => handleDeleteItem("work", forms[index])}
           disabled={index === 0}
         >
           Delete Job

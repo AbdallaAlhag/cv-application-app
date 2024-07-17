@@ -112,7 +112,7 @@ const LanguageForm = ({
   handleAddField,
   handleDeleteField,
 }) => (
-  <div>
+  <div >
     <form>
       <div className="inner-div">
         {Object.keys(formData).map((key) => (

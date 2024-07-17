@@ -3,7 +3,7 @@ import "../styles/LivePage.css";
 function LivePage({ data }) {
   return (
     <>
-      <div className="LivePage">
+      <div className="LivePage" id="content">
         <div className="personal-info">
           {data.personal.fullName && <h1>{data.personal.fullName}</h1>}
           {data.personal.jobTitle && <p>{data.personal.jobTitle}</p>}

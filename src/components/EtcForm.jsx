@@ -7,14 +7,14 @@ const EtcForm = ({ formData, handleChange }) => {
       <form className="etcForm">
         <div className="inner-div">
           <p>Certificates</p>
-          <label htmlFor="certificates"></label>
+          <label htmlFor="certificate"></label>
           <textarea
-            id="certificates"
-            name="certificates"
+            id="certificate"
+            name="certificate"
             rows="6"
             cols="50"
             placeholder="If you have any relevant ones; otherwise leave blank"
-            value={formData.certificates}
+            value={formData.certificate}
             onChange={handleChange}
           ></textarea>
         </div>
@@ -33,14 +33,14 @@ const EtcForm = ({ formData, handleChange }) => {
         </div>
         <div className="inner-div">
           <p>Interests</p>
-          <label htmlFor="interests"></label>
+          <label htmlFor="interest"></label>
           <textarea
-            id="interests"
-            name="interests"
+            id="interest"
+            name="interest"
             rows="6"
             cols="50"
             placeholder="Reading, sleeping, yoga, fishing, traveling, Reddit, Bear, Football"
-            value={formData.interests}
+            value={formData.interest}
             onChange={handleChange}
           ></textarea>
         </div>

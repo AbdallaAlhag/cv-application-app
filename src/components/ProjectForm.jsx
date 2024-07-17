@@ -4,8 +4,8 @@ import "../styles/ProjectForm.css";
 function ProjectForm({
   formData,
   handleChange,
-  handleAddJob,
-  handleDeleteJob,
+  handleAddItem,
+  handleDeleteItem,
   handleAddField,
   handleDeleteField,
 }) {
@@ -44,9 +44,8 @@ function ProjectForm({
         <button onClick={handleNextClick} disabled={!hasNext}>
           Next
         </button>
-        <button onClick={handleAddJob}>Add Project</button>
-        <button
-          onClick={() => handleDeleteJob(forms[index])}
+        <button onClick={handleAddItem("project")}>Add Job</button>        <button
+          onClick={() => handleDeleteItem("project", forms[index])}
           disabled={index === 0}
         >
           Delete Project

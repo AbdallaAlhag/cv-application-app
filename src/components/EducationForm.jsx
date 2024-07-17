@@ -9,10 +9,14 @@ const EducationForm = ({ formData, handleChange }) => {
   };
 
   return (
-    <div >
+    <div>
       <div className="header">
         <h2>Education Form</h2>
-        <button onClick={toggleForm}>Toggle Form</button>
+        {/* <button onClick={toggleForm}>Toggle Form</button> */}
+        <label className="switch" >
+          <input type="checkbox" />
+          <span className="slider" onClick={toggleForm}></span>
+        </label>
       </div>
       {activeForm === "degree1" && (
         <FormA

@@ -9,122 +9,27 @@ import EducationForm from "./components/EducationForm";
 import TechForm from "./components/TechForm";
 import WorkForm from "./components/WorkForm";
 import ProjectForm from "./components/ProjectForm";
+import PDFPreview from "./components/PDFPreview";
+import { dataEmpty, dataFilled } from "./data";
 
 const App = () => {
+  // Page State
   const [currentForm, setCurrentForm] = useState("personal");
-  const [formData, setFormData] = useState({
-    personal: {
-      fullName: "John Doe",
-      jobTitle: "Software Engineer",
-      email: "johndoe@protonmail.com",
-      phoneNumber: "123-456-7890",
-      address: "San Francisco",
-      summary: "Technology-driven software engineer with 4 years of experience in...",
-    },
-    link: {
-      website: "https://www.johndoe.com",
-      websiteText: "johndoe.com",
-      linkedin: "https://www.linkedin.com/john-doe-123",
-      linkedinText: "john-doe-123",
-      github: "https://www.github.com/johndoe",
-      githubText: "johndoe",
-    },
-    etc: {
-      certificate: "If you have any relevant ones; otherwise leave blank",
-      skills: "Strategic Planning, Problem Solving, Leadership, Teamwork, etc",
-      interest: "Reading, sleeping, yoga, fishing, traveling, Reddit, Bear, Football",
-    },
-    education: {
-      degree1: {
-        university: "Pistaschio Institute of Technology",
-        degree: "MS, Computer Science",
-        graduation: "August 2013",
-        other: "Goodwell, Motherland",
-      },
-      degree2: {
-        university: "XYZ University",
-        degree: "BS, Computer Science",
-        graduation: "August 2011",
-        other: "City, Country",
-      },
-    },
-    tech: {
-      complex: {
-        language: {
-          language_1: "JavaScript",
-          language_2: "Go",
-          language_3: "HTML",
-          language_4: "CSS",
-        },
-        external: {
-          external_1: "React",
-          external_2: "Redux",
-          external_3: "NestJS",
-          external_4: "PostgreSQL",
-        },
-        tool: {
-          tool_1: "Git",
-          tool_2: "AWS",
-          tool_3: "Postman",
-          tool_4: "SVN",
-        },
-      },
-      simple: {
-        skill_1: "",
-        skill_2: "",
-        skill_3: "",
-        skill_4: "",
-      },
-    },
-    work: {
-      job_1: {
-        name: "Boogle",
-        title: "Principal Software Engineer",
-        duration: "Oct 2017 - Present",
-        address: "LK-99 Valley, PA",
-        bulletPoint: {
-          bulletPoint_1: "Led a team of 10 developers in the successful design, development, and delivery of a scalable and high-performance SaaS platform, resulting in a 30% increase in user engagement and a 20% reduction in response time.",
-          bulletPoint_2: "Architected and implemented a microservices-based architecture using Node.js and Docker, resulting in a more flexible and maintainable system and enabling seamless integration with third-party services.",
-          bulletPoint_3: "Core responsibility #3. Pretend this is where they stop reading. First 3 things should be most impressive",
-          bulletPoint_4: "Core responsibility #4.",
-        },
-      },
-      job_2: {
-        name: "Nahoo",
-        title: "SDE - III",
-        duration: "Jan 2015 - Sep 2017",
-        address: "LK-99 Valley, PA",
-        bulletPoint: {
-          bulletPoint_1: "Core responsibility #1.",
-          bulletPoint_2: "Core responsibility #1.",
-          bulletPoint_3: "Core responsibility #3.",
-          bulletPoint_4: "Core responsibility #4.",
-        },
-      },
-    },
-    project: {
-      project_1: {
-        name: "TravelPlanner",
-        techStack: "HTML, CSS, React, TypeScript, Redux, Bootstrap, Express.js, PostgreSQL",
-        bulletPoint: {
-          bulletPoint_1: "Developed a user-friendly web application for travel planning, allowing users to create and manage their itineraries.",
-          bulletPoint_2: "Utilized Redux for state management, enabling efficient data flow and improved application performance.",
-          bulletPoint_3: "Designed RESTful APIs using Node.js and Express.js, facilitating data retrieval and storage from the PostgreSQL database.",
-          bulletPoint_4: "Implemented JWT-based authentication to ensure secure user registration and login processes.",
-        },
-      },
-      project_2: {
-        name: "Project No. 2",
-        techStack: "Example Tech Stack",
-        bulletPoint: {
-          bulletPoint_1: "Bullet point #1.",
-          bulletPoint_2: "Bullet point #2.",
-          bulletPoint_3: "Bullet point #3.",
-          bulletPoint_4: "Bullet point #4.",
-        },
-      },
-    },
-  });
+  // Empty/Filled data state
+  const [currentData, setCurrentData] = useState("fill");
+  // Form State
+  const [formData, setFormData] = useState(dataFilled);
+  // live Preview state
+  const [isLive, setIsLive] = useState(false);
+
+  // Preview and download state
+  const [isPreview, setIsPreview] = useState(false);
+  // Fill button State
+  const [isFilled, setIsFilled] = useState(true); // Initial state is true for "Fill"
+
+  const toggleFill = () => {
+    setIsFilled((prevIsFilled) => !prevIsFilled);
+  };
 
   const handleFormChange =
     (formName, degree = null, category = null) =>
@@ -271,39 +176,81 @@ const App = () => {
       }
     });
   };
-  const handleAddJob = () => {
+
+  const handleAddItem = (section) => {
+    return () => {
+      setFormData((prevData) => {
+        const newItemKey = `${section}_${
+          Object.keys(prevData[section]).length + 1
+        }`;
+        if (section === "work") {
+          return {
+            ...prevData,
+            [section]: {
+              ...prevData[section],
+              [newItemKey]: {
+                name: "",
+                title: "", // Add specific fields for 'work'
+                duration: "", // Add specific fields for 'work'
+                address: "", // Add specific fields for 'work'
+                bulletPoint: {
+                  bullet_1: "",
+                  bullet_2: "",
+                  bullet_3: "",
+                  bullet_4: "",
+                },
+              },
+            },
+          };
+        } else {
+          return {
+            ...prevData,
+            [section]: {
+              ...prevData[section],
+              [newItemKey]: {
+                name: "",
+                techStack: "", // Add specific fields for 'project'
+                bulletPoint: {
+                  bullet_1: "",
+                  bullet_2: "",
+                  bullet_3: "",
+                  bullet_4: "",
+                },
+              },
+            },
+          };
+        }
+      });
+    };
+  };
+
+  const handleDeleteItem = (section, itemKey) => {
     setFormData((prevData) => {
-      const newJobKey = `job_${Object.keys(prevData.work).length + 1}`;
+      const updatedSection = { ...prevData[section] };
+      delete updatedSection[itemKey];
       return {
         ...prevData,
-        work: {
-          ...prevData.work,
-          [newJobKey]: {
-            name: "",
-            title: "",
-            duration: "",
-            address: "",
-            bulletPoint: {
-              bullet_1: "",
-              bullet_2: "",
-              bullet_3: "",
-              bullet_4: "",
-            },
-          },
-        },
+        [section]: updatedSection,
       };
     });
   };
 
-  const handleDeleteJob = (jobKey) => {
-    setFormData((prevData) => {
-      const updatedWork = { ...prevData.work };
-      delete updatedWork[jobKey];
-      return {
-        ...prevData,
-        work: updatedWork,
-      };
-    });
+  const changeData = () => {
+    if (currentData === "fill") {
+      setCurrentData("empty");
+      setFormData(dataEmpty);
+    } else {
+      setCurrentData("fill");
+      setFormData(dataFilled);
+    }
+  };
+
+  const changePage = () => {
+    setIsPreview(!isPreview);
+  };
+
+  const toggleVisibility = () => {
+    setIsLive(!isLive);
   };
 
   const renderForm = () => {
@@ -350,8 +297,8 @@ const App = () => {
           <WorkForm
             formData={formData.work}
             handleChange={handleFormChange}
-            handleAddJob={handleAddJob}
-            handleDeleteJob={handleDeleteJob}
+            handleAddItem={handleAddItem}
+            handleDeleteItem={handleDeleteItem}
             handleAddField={handleAddField}
             handleDeleteField={handleDeleteField}
           />
@@ -361,8 +308,8 @@ const App = () => {
           <ProjectForm
             formData={formData.project}
             handleChange={handleFormChange}
-            handleAddJob={handleAddJob}
-            handleDeleteJob={handleDeleteJob}
+            handleAddItem={handleAddItem}
+            handleDeleteItem={handleDeleteItem}
             handleAddField={handleAddField}
             handleDeleteField={handleDeleteField}
           />
@@ -373,130 +320,65 @@ const App = () => {
   };
 
   return (
-    <div className="app">
-      <div className="side-bar">
-        <Navigation setForm={setCurrentForm} />
+    <>
+      <div className={!isPreview ? "app" : "app hidden"}>
+        <div className="side-bar">
+          <Navigation setForm={setCurrentForm} />
+          <div className="helper-button">
+            <button className="btn-53" onClick={toggleVisibility}>
+              <div className="original">Button</div>
+              <div className="letters">
+                <span>B</span>
+                <span>U</span>
+                <span>T</span>
+                <span>T</span>
+                <span>O</span>
+                <span>N</span>
+              </div>
+            </button>
+
+            {/* <button onClick={toggleVisibility}>editor only/live preview</button> */}
+            <button className="btn-17" onClick={changePage}>
+              <span className="text-container">
+                <span className="text">Download</span>
+              </span>
+            </button>
+            {/* <button onClick={changePage}>preview pdf and download/back</button> */}
+
+            <button
+              className="btn-12"
+              onClick={() => {
+                toggleFill();
+                changeData();
+              }}
+            >
+              <span>{isFilled ? "Clear" : "Fill"}</span>
+            </button>
+            {/* <button onClick={changeData}>clear/fill</button> */}
+          </div>
+        </div>
+        <div className="form-container">{renderForm()}</div>
+        <div
+          className={
+            !isLive ? "livePage-container" : "livePage-container hidden"
+          }
+        >
+          <LivePage data={formData}></LivePage>
+        </div>
       </div>
-      <div className="form-container">{renderForm()}</div>
-      <div className="livePage-container">
-        <LivePage data={formData}></LivePage>
+      <div className={isPreview ? "container" : "container hidden"}>
+        {/* <button onClick={changePage}>change back</button> */}
+        <div className="helper-button">
+          <button className="btn-17" onClick={changePage}>
+            <span className="text-container">
+              <span className="text">Edit</span>
+            </span>
+          </button>
+        </div>
+        <PDFPreview data={formData} />
       </div>
-    </div>
+    </>
   );
 };
 
 export default App;
-
-// const emptyData = {
-//   personal: {
-//     fullName: "",
-//     jobTitle: "",
-//     email: "",
-//     phoneNumber: "",
-//     address: "",
-//     summary: "",
-//   },
-//   link: {
-//     website: "",
-//     websiteText: "",
-//     linkedin: "",
-//     linkedinText: "",
-//     github: "",
-//     githubText: "",
-//   },
-//   etc: {
-//     certificate: "",
-//     skills: "",
-//     interest: "",
-//   },
-//   education: {
-//     degree1: {
-//       university: "",
-//       degree: "",
-//       graduation: "",
-//       other: "",
-//     },
-//     degree2: {
-//       university: "",
-//       degree: "",
-//       graduation: "",
-//       other: "",
-//     },
-//   },
-//   tech: {
-//     complex: {
-//       language: {
-//         language_1: "",
-//         language_2: "",
-//         language_3: "",
-//         language_4: "",
-//       },
-//       external: {
-//         external_1: "",
-//         external_2: "",
-//         external_3: "",
-//         external_4: "",
-//       },
-//       tool: {
-//         tool_1: "",
-//         tool_2: "",
-//         tool_3: "",
-//         tool_4: "",
-//       },
-//     },
-//     simple: {
-//       skill_1: "",
-//       skill_2: "",
-//       skill_3: "",
-//       skill_4: "",
-//     },
-//   },
-//   work: {
-//     job_1: {
-//       name: "",
-//       title: "",
-//       duration: "",
-//       address: "",
-//       bulletPoint: {
-//         bulletPoint_1: "",
-//         bulletPoint_2: "",
-//         bulletPoint_3: "",
-//         bulletPoint_4: "",
-//       },
-//     },
-//     job_2: {
-//       name: "",
-//       title: "",
-//       duration: "",
-//       address: "",
-//       bulletPoint: {
-//         bulletPoint_1: "",
-//         bulletPoint_2: "",
-//         bulletPoint_3: "",
-//         bulletPoint_4: "",
-//       },
-//     },
-//   },
-//   project: {
-//     project_1: {
-//       name: "",
-//       techStack: "",
-//       bulletPoint: {
-//         bulletPoint_1: "",
-//         bulletPoint_2: "",
-//         bulletPoint_3: "",
-//         bulletPoint_4: "",
-//       },
-//     },
-//     project_2: {
-//       name: "",
-//       techStack: "",
-//       bulletPoint: {
-//         bulletPoint_1: "",
-//         bulletPoint_2: "",
-//         bulletPoint_3: "",
-//         bulletPoint_4: "",
-//       },
-//     },
-//   },
-// };
