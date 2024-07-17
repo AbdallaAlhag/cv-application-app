@@ -7,17 +7,18 @@ const TechForm = ({
   handleAddField,
   handleDeleteField,
 }) => {
-  const [activeForm, setActiveForm] = useState("complex");
+  // const [activeForm, setActiveForm] = useState("complex");
+  const [activeForm] = useState("complex");
 
-  const toggleForm = () => {
-    setActiveForm(activeForm === "complex" ? "simple" : "complex");
-  };
+  // const toggleForm = () => {
+  //   // setActiveForm(activeForm === "complex" ? "simple" : "complex");
+  // };
 
   return (
     <div>
       <div className="header">
         <h2>Technical Skills</h2>
-        <button onClick={toggleForm}>Toggle Simple/Complex</button>
+        {/* <button onClick={toggleForm}>Toggle Simple/Complex</button> */}
       </div>
       {activeForm === "complex" && (
         <ComplexForm

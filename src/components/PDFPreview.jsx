@@ -1,6 +1,5 @@
 import html2pdf from "html2pdf.js";
 import LivePage from "./LivePage";
-import "../styles/PDFPreview.css";
 
 const PDFPreview = ({ data }) => {
   const generatePDF = () => {

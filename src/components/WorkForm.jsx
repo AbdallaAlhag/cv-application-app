@@ -9,9 +9,7 @@ function WorkForm({
   handleAddField,
   handleDeleteField,
 }) {
-  // console.log(formData);
   const forms = Object.keys(formData);
-  console.log(forms);
 
   const [index, setIndex] = useState(0);
   const hasPrev = index > 0;
@@ -58,7 +56,6 @@ function WorkForm({
             key={jobKey}
             style={{ display: index === idx ? "block" : "none" }}
           >
-            {/* {console.log(jobKey)} */}
             <DynamicForm
               formData={formData[jobKey]}
               jobKey={jobKey}
@@ -85,7 +82,6 @@ function DynamicForm({
   handleAddField,
   handleDeleteField,
 }) {
-  // console.log(formData);
   return (
     <>
       <form className="workForm">

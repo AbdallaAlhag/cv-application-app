@@ -79,7 +79,7 @@ const PersonalForm = ({ formData, handleChange }) => {
             <textarea
               id="summary"
               name="summary"
-              rows="4"
+              rows="3"
               cols="50"
               placeholder="Technology-driven Software Engineer with 4 years of experience in..."
               value={formData.summary}

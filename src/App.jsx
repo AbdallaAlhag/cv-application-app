@@ -35,11 +35,7 @@ const App = () => {
     (formName, degree = null, category = null) =>
     (e = { target: { name: "", value: "" } }) => {
       const { name, value } = e.target;
-      // console.log("wtf");
-      // console.log(
-      //   `FormName: ${formName}, Degree: ${degree}, Category: ${category}`
-      // );
-      // console.log(`Name: ${name}, Value: ${value}`);
+ 
 
       setFormData((prevData) => {
         if (degree && category) {
@@ -326,14 +322,14 @@ const App = () => {
           <Navigation setForm={setCurrentForm} />
           <div className="helper-button">
             <button className="btn-53" onClick={toggleVisibility}>
-              <div className="original">Button</div>
+              <div className="original">Switch</div>
               <div className="letters">
-                <span>B</span>
-                <span>U</span>
+                <span>S</span>
+                <span>W</span>
+                <span>I</span>
                 <span>T</span>
-                <span>T</span>
-                <span>O</span>
-                <span>N</span>
+                <span>C</span>
+                <span>H</span>
               </div>
             </button>
 

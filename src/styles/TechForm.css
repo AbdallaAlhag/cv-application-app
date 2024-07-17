@@ -1,7 +1,8 @@
 .complex-header {
   display: flex;
   align-items: center;
-  gap: 25px;
+  justify-content: space-between;
+  margin-right: 5%;
 }
 
 .complex-header h2 {

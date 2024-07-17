@@ -105,10 +105,6 @@ function LivePage({ data }) {
           </div>
         </div>
 
-        <div className="title">
-          <h3>Technical Skills</h3>
-        </div>
-
         {/* <div className="tech-info simple">
           <div className="skill-info">
             <p>Skills</p>
@@ -119,60 +115,14 @@ function LivePage({ data }) {
           </div>
         </div> */}
 
-        {/* Since it is dynamic we have to grab the info can't hard code it but this is still good for now */}
-        <div className="tech-info complex">
-          <div className="left">
-            <p className="info-title">Languages: </p>
-            <div className="right">
-              {data.tech.complex.language.language_1 && (
-                <p>{data.tech.complex.language.language_1},</p>
-              )}
-              {data.tech.complex.language.language_2 && (
-                <p>{data.tech.complex.language.language_2},</p>
-              )}
-              {data.tech.complex.language.language_3 && (
-                <p>{data.tech.complex.language.language_3},</p>
-              )}
-              {data.tech.complex.language.language_4 && (
-                <p>{data.tech.complex.language.language_4}</p>
-              )}
-            </div>
-          </div>
-          <div className="left">
-            <p className="info-title">Frameworks, Libraries, & Databases: </p>
-            <div className="right">
-              {data.tech.complex.external.external_1 && (
-                <p>{data.tech.complex.external.external_1},</p>
-              )}
-              {data.tech.complex.external.external_2 && (
-                <p>{data.tech.complex.external.external_2},</p>
-              )}
-              {data.tech.complex.external.external_3 && (
-                <p>{data.tech.complex.external.external_3},</p>
-              )}
-              {data.tech.complex.external.external_4 && (
-                <p>{data.tech.complex.external.external_4}</p>
-              )}
-            </div>
-          </div>
-          <div className="left">
-            <p className="info-title">Tools & Other Technologies:</p>
-            <div className="right">
-              {data.tech.complex.tool.tool_1 && (
-                <p>{data.tech.complex.tool.tool_1},</p>
-              )}
-              {data.tech.complex.tool.tool_2 && (
-                <p>{data.tech.complex.tool.tool_2},</p>
-              )}
-              {data.tech.complex.tool.tool_3 && (
-                <p>{data.tech.complex.tool.tool_3},</p>
-              )}
-              {data.tech.complex.tool.tool_4 && (
-                <p>{data.tech.complex.tool.tool_4}</p>
-              )}
-            </div>
-          </div>
+        {/* Set this to complex hardcoded for now */}
+        <div className="title">
+          <h3>Technical Skills</h3>
         </div>
+        <div className="tech-info complex">
+          <TechExperience data={data} />
+        </div>
+
 
         <div className="title">
           <h3>Work Experience</h3>
@@ -230,11 +180,11 @@ const JobInfo = ({ jobData }) => {
           <p>{jobData.address}</p>
         </div>
       </div>
-      <div>
+      <ul>
         {Object.values(jobData.bulletPoint).map((bullet, index) => (
           <li key={index}>{bullet}</li>
         ))}
-      </div>
+      </ul>
     </>
   );
 };
@@ -258,11 +208,11 @@ const ProjectInfo = ({ jobData }) => {
         <p className="info-title">{jobData.name}</p>
         <i> -{jobData.techStack}</i>
       </div>
-      <div>
+      <ul>
         {Object.values(jobData.bulletPoint).map((bullet, index) => (
           <li key={index}>{bullet}</li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
@@ -274,6 +224,41 @@ const ProjectExperience = ({ data }) => {
     <div className="project-experience">
       {jobKeys.map((jobKey) => (
         <ProjectInfo key={jobKey} jobData={data.project[jobKey]} />
+      ))}
+    </div>
+  );
+};
+
+const TechInfo = ({ Data, Title }) => {
+  function capitalizeFirstLetter(string) {
+    if (!string) return "";
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
+  return (
+    <>
+      <div className="left">
+        <p className="info-title">{capitalizeFirstLetter(Title)}: </p>
+        <div className="right">
+          {Object.values(Data).map((bullet, index, arr) => (
+            <p key={index}>
+              {bullet}
+              {index !== arr.length - 1 ? "," : ""}
+            </p>
+          ))}
+        </div>
+      </div>
+    </>
+  );
+};
+
+const TechExperience = ({ data }) => {
+  const keys = Object.keys(data.tech.complex);
+
+  return (
+    <div className="tech-info">
+      {keys.map((key) => (
+        <TechInfo key={key} Title={key} Data={data.tech.complex[key]} />
       ))}
     </div>
   );

@@ -9,9 +9,7 @@ function ProjectForm({
   handleAddField,
   handleDeleteField,
 }) {
-  // console.log(formData);
   const forms = Object.keys(formData);
-  // console.log(forms);
 
   const [index, setIndex] = useState(0);
   const hasPrev = index > 0;
@@ -84,7 +82,6 @@ function DynamicForm({
   handleAddField,
   handleDeleteField,
 }) {
-  // console.log(formData);
   return (
     <>
       <form className="projectForm">

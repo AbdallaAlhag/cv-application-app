@@ -4,9 +4,11 @@ body,
 #root {
   height: 100%;
   margin: 0;
+  background-color: #1f1f1f;
 }
+
 .app {
-  height: 100%;
+  height: 100vh;
   display: flex;
   flex-direction: row;
   /* justify-content: center; */
@@ -15,16 +17,55 @@ body,
   gap: 50px;
   background-color: #1f1f1f;
   color: #f5f5f5;
+
+  min-height: 100vh; 
+  width: 100vw; 
+  box-sizing: border-box;
 }
+
+
+.side-bar {
+  flex: 0 1 12.5rem;
+  min-width: 12.5rem; 
+  overflow-y: auto; 
+}
+
+.form-container,
+.livePage-container {
+  flex: 1 1 auto; 
+  box-sizing: border-box;
+  overflow-y: auto;  
+  min-width: 0; 
+}
+
+/*
+@media (max-width: 960px) {
+  .app {
+    flex-direction: column; 
+    gap: 1rem;
+  }
+
+  .side-bar {
+    flex: 0 1 100%; 
+    max-width: 100%;
+  }
+
+  .form-container,
+  .livePage-container {
+    flex: 1 1 100%; 
+  }
+}
+*/
 
 .form-container {
   align-self: center;
   justify-content: center;
-  border: 5px solid black;
+  border: 3px solid #2e2e2e;
   border-radius: 5px;
   width: 100%;
   padding: 2em;
-  max-width: 1200px;
+  margin: 1rem;
+  /* max-width: 1200px; */
   /* height: 90%; */
   max-height: 75%;
 }
@@ -52,6 +93,8 @@ form {
   overflow-y: scroll;
   box-sizing: border-box;
 }
+
+
 
 form label {
   margin-bottom: 5px;
@@ -84,7 +127,7 @@ form textarea {
   flex-direction: column;
   justify-content: center;
   padding: 20px;
-  max-width: 15%;
+  /* max-width: 25%; */
   gap: 30px;
 }
 
@@ -104,6 +147,8 @@ form textarea {
 .livePage-container {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
   width: 100%;
   color: black;
 }
@@ -154,13 +199,26 @@ form textarea {
 }
 
 .container {
-  height: 100%;
   display: flex;
+  flex: 1 1 auto;
   justify-content: center;
   align-items: center;
   background-color: #1f1f1f;
+  overflow: auto;
 }
 
 .container .LivePage {
   background-color: white;
+  box-sizing: border-box;
+  overflow-y: auto;  
+  /* min-width: 0;  */
+}
+
+.pdf-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  overflow: auto;
+  padding: 50px;
 }
