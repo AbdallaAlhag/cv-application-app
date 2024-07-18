@@ -18,24 +18,23 @@ body,
   background-color: #1f1f1f;
   color: #f5f5f5;
 
-  min-height: 100vh; 
-  width: 100vw; 
+  min-height: 100vh;
+  width: 100vw;
   box-sizing: border-box;
 }
 
-
 .side-bar {
   flex: 0 1 12.5rem;
-  min-width: 12.5rem; 
-  overflow-y: auto; 
+  min-width: 12.5rem;
+  overflow-y: auto;
 }
 
 .form-container,
 .livePage-container {
-  flex: 1 1 auto; 
+  flex: 1 1 auto;
   box-sizing: border-box;
-  overflow-y: auto;  
-  min-width: 0; 
+  overflow-y: auto;
+  min-width: 0;
 }
 
 /*
@@ -94,8 +93,6 @@ form {
   box-sizing: border-box;
 }
 
-
-
 form label {
   margin-bottom: 5px;
   font-weight: bold;
@@ -104,7 +101,7 @@ form label {
 form input,
 form textarea {
   /* width: 100%; */
-  
+
   padding: 12px;
   border: none;
   border-radius: 5px;
@@ -143,17 +140,19 @@ form textarea {
   justify-content: center;
 }
 
-
 .livePage-container {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: center;
   width: 100%;
+
   color: black;
 }
 .LivePage {
   background-color: white;
+  min-width: 700px;
+  min-height: 750px;
 }
 
 .form-container button {
@@ -179,7 +178,7 @@ form textarea {
   height: 100%;
   width: 0;
   border-radius: 5px;
-  background-color: #555555  ;
+  background-color: #555555;
   z-index: -1;
   -webkit-box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
   box-shadow: 4px 8px 19px -3px rgba(0, 0, 0, 0.27);
@@ -210,7 +209,7 @@ form textarea {
 .container .LivePage {
   background-color: white;
   box-sizing: border-box;
-  overflow-y: auto;  
+  overflow-y: auto;
   /* min-width: 0;  */
 }
 
@@ -218,7 +217,7 @@ form textarea {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
   overflow: auto;
   padding: 50px;
 }
